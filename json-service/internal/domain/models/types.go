@@ -1,17 +1,19 @@
-# Serialisation
+package models
 
-Приложение для тестирования различных форматов сериализации. При этом тестирование каждого формата осуществляется в отдельном контейнере.
+import (
+	"encoding/json"
+)
 
-По запросу `get_result/{format}` сервис возвращает ответ вида:  `{Формат сериализации} – {Размер сериализованной структуры/объекта в байтах} – {Время сериализации}`
+type studyDirection int
 
-### Usage
-Для запуска контейнеров можно использовать следующую команду:
-```docker-compose -f ./docker-compose.yml up -d --build```
+const (
+	DirMachineLearning studyDirection = iota
+	DirDistributedSystems
+	DirIndustrialDevelopment
+	DirTheoreticalInformatics
+	DirDataAnalysis
+)
 
-### Data
-Сериализируемые данные представляют собой следующую структуру:
-
-```Go
 type Student struct {
 	Name       string         `json:"name" yaml:"name" xml:"name"`
 	Surname    string         `json:"surname" yaml:"surname" xml:"surname"`
@@ -21,11 +23,9 @@ type Student struct {
 	Courses    []string       `json:"courses" yaml:"courses" xml:"courses"`
 	Marks      map[string]int `json:"marks" yaml:"marks" xml:"marks"`
 }
-```
 
-Инициализируем следующим образом:
-```Go
-Student{
+func NewStudent() *Student {
+	return &Student{
 		Name:       "Maria",
 		Surname:    "Mironova",
 		Age:        20,
@@ -36,4 +36,12 @@ Student{
 		Marks: map[string]int{"machine learning": 5, "database": 7, "design of fault-tolerant systems": 8,
 			"service-oriented architectures": 8, "optimization methods": 6},
 	}
-```
+}
+
+func (s *Student) SerializeJSON() ([]byte, error) {
+	return json.Marshal(s)
+}
+
+func DeserializeJSON(data []byte, s *Student) error {
+	return json.Unmarshal(data, s)
+}
