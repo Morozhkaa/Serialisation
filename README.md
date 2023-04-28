@@ -1,12 +1,19 @@
 # Serialisation
 
-Приложение для тестирования различных форматов сериализации. При этом тестирование каждого формата осуществляется в отдельном контейнере.
+Приложение для тестирования различных форматов сериализации. При этом тестирование каждого формата осуществляется в отдельном контейнере. Используемые порты следующие:
 
-По запросу `get_result/{format}` сервис возвращает ответ вида:  `{Формат сериализации} – {Размер сериализованной структуры/объекта в байтах} – {Время сериализации}`
+    json-service: порт 3030
+    yaml-service: порт 3031
 
 ### Usage
-Для запуска контейнеров можно использовать следующую команду:
+1. Для запуска контейнеров можно использовать следующую команду:
 ```docker-compose -f ./docker-compose.yml up -d --build```
+
+2. По запросу `get_result/{format}` сервис возвращает ответ вида:  `{Формат сериализации} – {Размер сериализованной структуры/объекта в байтах} – {Время сериализации}`.    
+_Например:_  
+При переходе на ```http://localhost:3030/get_result/json``` получили ответ `"JSON - 24 - 186.886µs - 360.14µs"`
+
+
 
 ### Data
 Сериализируемые данные представляют собой следующую структуру:
@@ -26,14 +33,14 @@ type Student struct {
 Инициализируем следующим образом:
 ```Go
 Student{
-		Name:       "Maria",
-		Surname:    "Mironova",
-		Age:        20,
-		Percentile: 50.78,
-		Direction:  DirIndustrialDevelopment,
-		Courses: []string{"machine learning", "database", "design of fault-tolerant systems",
-			"service-oriented architectures", "optimization methods"},
-		Marks: map[string]int{"machine learning": 5, "database": 7, "design of fault-tolerant systems": 8,
-			"service-oriented architectures": 8, "optimization methods": 6},
-	}
+    Name:       "Maria",
+    Surname:    "Mironova",
+    Age:        20,
+    Percentile: 50.78,
+    Direction:  DirIndustrialDevelopment,
+    Courses: []string{"machine learning", "database", "design of fault-tolerant systems",
+        "service-oriented architectures", "optimization methods"},
+    Marks: map[string]int{"machine learning": 5, "database": 7, "design of fault-tolerant systems": 8,
+        "service-oriented architectures": 8, "optimization methods": 6},
+}
 ```
