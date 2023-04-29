@@ -1,0 +1,14 @@
+syntax="proto3";
+package models;
+
+option go_package = ".";
+
+message Student {
+      string Name = 1;
+      string Surname = 2;
+      int32 Age = 3;
+      float Percentile = 4;
+      int32 Direction = 5;
+      repeated string Courses = 6;
+      map<string, int32> Marks = 7;
+}
