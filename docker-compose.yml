@@ -17,6 +17,7 @@ services:
       - HTTP_PORT=3030
     networks:
       - myapp
+
   yaml:
     image: yaml:1
     container_name: yaml
@@ -29,4 +30,16 @@ services:
       - HTTP_PORT=3031
     networks:
       - myapp
-    
+
+  gob:
+    image: gob:1
+    container_name: gob
+    build:
+      context: gob-service
+      dockerfile: Dockerfile
+    ports:
+      - 3032:3032
+    environment:
+      - HTTP_PORT=3032
+    networks:
+      - myapp

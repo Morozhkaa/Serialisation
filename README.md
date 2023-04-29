@@ -4,6 +4,7 @@
 
     json-service: порт 3030
     yaml-service: порт 3031
+    gob-service:  порт 3032
 
 ### Usage
 1. Для запуска контейнеров можно использовать следующую команду:
@@ -44,3 +45,10 @@ Student{
         "service-oriented architectures": 8, "optimization methods": 6},
 }
 ```
+
+### Results
+Усредненные результаты получились следующими:
+
+    GOB  - 24 - 387.892µs  - 1377.586µs
+    JSON - 24 - 175.305µs  - 360.642µs
+    YAML - 24 - 1279.606µs - 1427.861µs
