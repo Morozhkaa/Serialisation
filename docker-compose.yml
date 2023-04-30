@@ -69,3 +69,16 @@ services:
       - HTTP_PORT=3034
     networks:
       - myapp
+
+  msgpack:
+    image: msgpack:1
+    container_name: msgpack
+    build:
+      context: msgpack-service
+      dockerfile: Dockerfile
+    ports:
+      - 3035:3035
+    environment:
+      - HTTP_PORT=3035
+    networks:
+      - myapp

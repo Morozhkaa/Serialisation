@@ -11,6 +11,7 @@
     gob-service:        3032,       /get_result/gob
     proto-service:      3033,       /get_result/proto
     avro-service:       3034,       /get_result/avro
+    msgpack-service:    3035,       /get_result/msgpack
 
 ### Usage
 1. Для запуска контейнеров можно использовать следующую команду:
@@ -27,13 +28,13 @@ _Например:_
 
 ```Go
 type Student struct {
-	Name       string         `json:"name" yaml:"name" avro:"name" xml:"name"`
-	Surname    string         `json:"surname" yaml:"surname" avro:"surname" xml:"surname"`
-	Age        int            `json:"age" yaml:"age" avro:"age" xml:"age"`
-	Percentile float32        `json:"percentile" yaml:"percentile" avro:"percentile" xml:"percentile"`
-	Direction  studyDirection `json:"direction" yaml:"direction" avro:"direction" xml:"direction"`
-	Courses    []string       `json:"courses" yaml:"courses" avro:"courses" xml:"courses"`
-	Marks      map[string]int `json:"marks" yaml:"marks" avro:"marks" xml:"marks"`
+	Name       string         `json:"name" yaml:"name" avro:"name" msgpack:"name" xml:"name"`
+	Surname    string         `json:"surname" yaml:"surname" avro:"surname" msgpack:"surname" xml:"surname"`
+	Age        int            `json:"age" yaml:"age" avro:"age" msgpack:"age" xml:"age"`
+	Percentile float32        `json:"percentile" yaml:"percentile" avro:"percentile" msgpack:"percentile" xml:"percentile"`
+	Direction  studyDirection `json:"direction" yaml:"direction" avro:"direction" msgpack:"direction" xml:"direction"`
+	Courses    []string       `json:"courses" yaml:"courses" avro:"courses" msgpack:"courses" xml:"courses"`
+	Marks      map[string]int `json:"marks" yaml:"marks" avro:"marks" msgpack:"marks" xml:"marks"`
 }
 ```
 
@@ -55,14 +56,15 @@ Student{
 ### Results
 Усредненные результаты получились следующими:
 
-    GOB   - 24 -  387.892µs  - 1377.586µs
-    JSON  - 24 -  175.305µs  -  360.642µs
-    YAML  - 24 - 1279.606µs  - 1427.861µs
-    PROTO - 24 -  184.803µs  -  136.391µs
-    AVRO  - 24 -   95.176µs  -   71.244µs
+    GOB      - 24 -  387.892µs  - 1377.586µs
+    JSON     - 24 -  175.305µs  -  360.642µs
+    YAML     - 24 - 1279.606µs  - 1427.861µs
+    PROTO    - 24 -  184.803µs  -  136.391µs
+    AVRO     - 24 -   95.176µs  -   71.244µs
+    MSGPACK  - 24 -  242.366µs  -  216.944µs
 
 Форматы по возрастанию времени преобразования:  
 
-_Serialization:_    ```AVRO (95µs)``` - ```JSON (175µs)```  - ```PROTO (184µs)``` - ```GOB (387µs)``` - ```YAML (1279µs)```
+_Serialization:_    ```AVRO (95µs)``` - ```JSON (175µs)```  - ```PROTO (184µs)``` -  ```MSGPACK (242µs)``` - ```GOB (387µs)``` - ```YAML (1279µs)```
 
-_Deserialization:_  ```AVRO (71µs)``` - ```PROTO (136µs)``` - ```JSON (360µs)```  - ```GOB(1377µs)``` - ```YAML(1427µs)```
+_Deserialization:_  ```AVRO (71µs)``` - ```PROTO (136µs)``` - ```MSGPACK (216µs)``` - ```JSON (360µs)```  - ```GOB(1377µs)``` - ```YAML(1427µs)```
