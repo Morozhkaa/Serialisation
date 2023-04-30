@@ -6,7 +6,7 @@ networks:
 
 services:
   json:
-    image: json:1
+    image: morozhka/json:v0.1.0
     container_name: json
     build:
       context: json-service
@@ -19,7 +19,7 @@ services:
       - myapp
 
   yaml:
-    image: yaml:1
+    image: morozhka/yaml:v0.1.0
     container_name: yaml
     build:
       context: yaml-service
@@ -32,7 +32,7 @@ services:
       - myapp
 
   gob:
-    image: gob:1
+    image: morozhka/gob:v0.1.0
     container_name: gob
     build:
       context: gob-service
@@ -45,7 +45,7 @@ services:
       - myapp
 
   proto:
-    image: proto:1
+    image: morozhka/proto:v0.1.0
     container_name: proto
     build:
       context: proto-service
