@@ -58,7 +58,7 @@ services:
       - myapp
 
   avro:
-    image: avro:1
+    image: morozhka/avro:v0.1.0
     container_name: avro
     build:
       context: avro-service
@@ -71,7 +71,7 @@ services:
       - myapp
 
   msgpack:
-    image: msgpack:1
+    image: morozhka/msgpack:v0.1.0
     container_name: msgpack
     build:
       context: msgpack-service
@@ -80,5 +80,18 @@ services:
       - 3035:3035
     environment:
       - HTTP_PORT=3035
+    networks:
+      - myapp
+
+  xml:
+    image: morozhka/xml:v0.1.0
+    container_name: xml
+    build:
+      context: xml-service
+      dockerfile: Dockerfile
+    ports:
+      - 3036:3036
+    environment:
+      - HTTP_PORT=3036
     networks:
       - myapp

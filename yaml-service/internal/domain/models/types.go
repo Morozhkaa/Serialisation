@@ -13,13 +13,13 @@ const (
 )
 
 type Student struct {
-	Name       string         `json:"name" yaml:"name" xml:"name"`
-	Surname    string         `json:"surname" yaml:"surname" xml:"surname"`
-	Age        int            `json:"age" yaml:"age" xml:"age"`
-	Percentile float32        `json:"percentile" yaml:"percentile" xml:"percentile"`
-	Direction  studyDirection `json:"direction" yaml:"direction" xml:"direction"`
-	Courses    []string       `json:"courses" yaml:"courses" xml:"courses"`
-	Marks      map[string]int `json:"marks" yaml:"marks" xml:"marks"`
+	Name       string         `yaml:"name"`
+	Surname    string         `yaml:"surname"`
+	Age        int            `yaml:"age"`
+	Percentile float32        `yaml:"percentile"`
+	Direction  studyDirection `yaml:"direction"`
+	Courses    []string       `yaml:"courses"`
+	Marks      map[string]int `yaml:"marks"`
 }
 
 func NewStudent() *Student {

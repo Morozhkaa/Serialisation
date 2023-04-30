@@ -20,8 +20,8 @@ type Student struct {
 	Age        int            `msgpack:"age"`
 	Percentile float32        `msgpack:"percentile"`
 	Direction  studyDirection `msgpack:"direction"`
-	Courses    []string       `avro:"courses"`
-	Marks      map[string]int `avro:"marks"`
+	Courses    []string       `msgpack:"courses"`
+	Marks      map[string]int `msgpack:"marks"`
 }
 
 func NewStudent() *Student {
