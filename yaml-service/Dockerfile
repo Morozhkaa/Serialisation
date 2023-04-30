@@ -1,13 +1,13 @@
 FROM golang:1.19-buster as builder
 
-WORKDIR /json
+WORKDIR /yaml
 COPY go.* ./
 RUN go mod download
 COPY . .
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -v -o application
 
 FROM alpine:3.15.4
-WORKDIR /json
-COPY --from=builder /json/application /json/application
+WORKDIR /yaml
+COPY --from=builder /yaml/application /yaml/application
 COPY *.yaml ./
-CMD ["/json/application"]
+CMD ["/yaml/application"]
